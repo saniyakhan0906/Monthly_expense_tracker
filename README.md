@@ -9,12 +9,16 @@ Budget Management: Set a budget and keep track of your spending.
 
 Data Visualization: Visualize your expenses with interactive charts.
 
+![Expense Tracker](https://github.com/saniyakhan0906/Monthly_expense_tracker/assets/87354882/744b9569-65e6-4c16-8ccd-c43b0eb1700b)
+
+
 Getting Started
+
 To get started with Expense Tracker, follow these steps:
 
 Clone the repository:
 
-`git clone https://github.com/yourusername/expense-tracker.git`
+`git clone https://github.com/saniyakhan0906/expense-tracker.git`
 
 Install dependencies:
 
