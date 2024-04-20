@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+        /* Reset CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom, #f0f0f0, #ffffff); /* Gradient background */
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for content */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+            display: flex; /* Use flexbox layout */
+            flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+            justify-content: space-between; /* Distribute items evenly along the main axis */
+            border-radius: 10px; /* Add rounded corners */
+        }
+
+        header {
+            text-align: center;
+            width: 100%; /* Ensure header takes full width */
+            border-bottom: 2px solid #ddd; /* Add a border at the bottom */
+            padding-bottom: 10px; /* Add some space below the header */
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .summary {
+            background-color: #f9f9f9; /* Light gray background color for summary section */
+            padding: 20px;
+            border-radius: 10px; /* Add rounded corners */
+            width: 100%; /* Ensure summary section takes full width */
+            margin-bottom: 20px; /* Add margin below the summary */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+        }
+
+        section {
+            width: 45%; /* Adjust width as needed */
+            padding: 20px; /* Add padding */
+            background-color: #f9f9f9; /* Light gray background color */
+            border-radius: 10px; /* Add rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        img {
+            max-width: 100%; /* Ensure the image doesn't exceed its container width */
+            height: auto;
+            border-radius: 5px; /* Add rounded corners */
+        }
+
+        form {
+            margin-top: 20px; /* Add margin at the top of the form */
+        }
+
+        label {
+            font-weight: bold; /* Make labels bold */
+        }
+
+        input[type="text"],
+        select {
+            width: calc(100% - 22px); /* Make input fields and select dropdowns full width */
+            padding: 10px; /* Add padding */
+            margin-top: 5px; /* Add some space between elements */
+            border: 1px solid #ddd; /* Add a border */
+            border-radius: 5px; /* Add rounded corners */
+            box-sizing: border-box; /* Include padding and border in element's total width */
+        }
+
+        button {
+            width: calc(100% - 22px); /* Make button full width */
+            padding: 10px; /* Add padding */
+            margin-top: 10px; /* Add margin at the top */
+            background-color: #007bff; /* Blue button color */
+            color: #fff; /* White text color */
+            border: none;
+            border-radius: 5px; /* Add rounded corners */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box; /* Include padding and border in element's total width */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 100%; /* Make sections full width on small screens */
+            }
+            section {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Expense Tracker</h1>
+            <div class="summary">
+                <h2>Total Spent: ₹{{ total_spent }}</h2>
+                <h2>Budget Remaining: ₹{{ remaining_budget }}</h2>
+                <h2>Remaining Budget per Day in Month: ₹{{ daily_budget_remaining }}</h2>
+            </div>
+        </header>
+        <section>
+            <h3>Budget Distribution by Category:</h3>
+            <img src="{{ url_for('static', filename='budget_distribution.png') }}" alt="Budget Distribution">
+        </section>
+        <section>
+            
+            <h3>Add Expense:</h3>
+            <form action="/add_expense" method="post">
+                <label for="name">Expense Name:</label>
+                <input type="text" id="name" name="name"><br>
+                <label for="amount">Amount:</label>
+                <input type="text" id="amount" name="amount"><br>
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="🍩 Food">🍩 Food</option>
+                    <option value="🏠 Home">🏠 Home</option>
+                    <option value="💼 Work">💼 Work</option>
+                    <option value="🍻 Fun">🍻 Fun</option>
+                    <option value="✨ Misc">✨ Misc</option>
+                    <option value="🛵 Transportation">🛵 Transportation</option>
+                    <option value="🩺 Health & Beauty">🩺 Health & Beauty</option>
+                    <option value="📚 Education">📚 Education</option>
+                    <option value="🛒🛍️ Shopping">🛒🛍️ Shopping</option>
+                    <!-- Add more options as needed -->
+                </select><br>
+                <button type="submit">Add Expense</button>
+            </form>
+            <h3>Expenses:</h3>
+            <ul>
+                {% for expense in expenses %}
+                <li>{{ expense.name }} - ₹{{ expense.amount }} - {{ expense.category }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
