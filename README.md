@@ -24,6 +24,8 @@ Install dependencies:
 
 `pip install Flask`
 
+`pip install matplotlib`
+
 Run the application:
 
 `python expense_tracker.py`
